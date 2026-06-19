@@ -7,8 +7,9 @@ export const state: AppState = {
   orbitStride: 1,
   twistAmount: 0,
   twistMin: 0,
-  twistMax: 2,
+  twistMax: 21,
   isAnimating: false,
+  isDisplayOrbitLines: false,
 };
 
 export function getSceneParams(currentState: AppState): SceneParams {
@@ -20,5 +21,14 @@ export function getSceneParams(currentState: AppState): SceneParams {
     orbitsCount: currentState.orbitsCount,
     orbitStride: currentState.orbitStride,
     twistAmount: currentState.twistAmount,
+    isDisplayOrbitLines: currentState.isDisplayOrbitLines,
   };
+}
+
+export function setOrbitsCount(state: AppState, value: number): void {
+  state.orbitsCount = value;
+  state.twistMax = value;
+  if (state.twistAmount > state.twistMax) {
+    state.twistAmount = state.twistMax;
+  }
 }

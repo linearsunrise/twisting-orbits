@@ -38,6 +38,12 @@ body {
   gap: 8px;
 }
 
+.controls__column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .controls__row--actions {
   margin-top: 4px;
   justify-content: space-between;
@@ -55,6 +61,35 @@ body {
 
 .controls__range:disabled {
   opacity: 0.5;
+}
+
+.controls__animate-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.controls__animate-toggle:hover {
+  background: #1d4ed8;
+}
+
+.controls__animate-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.controls__animate-toggle::after {
+  content: '▶';
+}
+
+.controls__animate-toggle:has(input:checked)::after {
+  content: '⏸';
 }
 
 .controls__checkbox-label {

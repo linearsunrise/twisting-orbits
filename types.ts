@@ -7,6 +7,7 @@ export interface AppState {
   twistMin: number;
   twistMax: number;
   isAnimating: boolean;
+  isDisplayOrbitLines: boolean;
 }
 
 export interface SceneParams {
@@ -18,14 +19,15 @@ export interface SceneParams {
   orbitStride: number;
   twistAmount: number;
   clear?: boolean;
+  isDisplayOrbitLines: boolean;
 }
 
-export interface DrawingContext {
-  clearRect(x: number, y: number, w: number, h: number): void;
-  fillStyle: string | CanvasGradient | CanvasPattern;
-  beginPath(): void;
-  arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): void;
-  fill(fillRule?: CanvasFillRule): void;
+export interface DrawingContext extends CanvasRenderingContext2D {
+  // clearRect(x: number, y: number, w: number, h: number): void;
+  // fillStyle: string | CanvasGradient | CanvasPattern;
+  // beginPath(): void;
+  // arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): void;
+  // fill(fillRule?: CanvasFillRule): void;
 }
 
 export interface Controls {

@@ -17,7 +17,7 @@
           type="range"
           id="twistRange"
           min="0"
-          max="2"
+          max="21"
           value="0"
           step="any"
         />
@@ -25,7 +25,9 @@
       </div>
 
       <div class="controls__row">
-        <label class="controls__label" for="orbitsCountRange">Количество орбит: </label>
+        <label class="controls__label" for="orbitsCountRange"
+          >Количество орбит:
+        </label>
         <input
           class="controls__range"
           type="range"
@@ -38,7 +40,9 @@
       </div>
 
       <div class="controls__row">
-        <label class="controls__label" for="orbitStrideRange">Шаг орбит: </label>
+        <label class="controls__label" for="orbitStrideRange"
+          >Шаг орбит:
+        </label>
         <input
           class="controls__range"
           type="range"
@@ -50,10 +54,16 @@
         <span class="controls__value" id="orbitStrideValue">1</span>
       </div>
 
-      <div class="controls__row controls__row--actions">
+      <div class="controls__row">
         <label class="controls__checkbox-label">
+          <input type="checkbox" id="displayOrbits" />
+          Отображать орбиты
+        </label>
+      </div>
+
+      <div class="controls__row controls__row--actions">
+        <label class="controls__animate-toggle" for="animateToggle">
           <input type="checkbox" id="animateToggle" />
-          Автоанимация
         </label>
 
         <button class="controls__button" id="exportButton" type="button">
@@ -72,21 +82,24 @@
         shimMode: true,
         fetch: async (url, opts) => {
           const res = await fetch(url, opts);
-          if (!url.endsWith('.ts')) return res;
+          if (!url.endsWith(".ts")) return res;
           const src = await res.text();
           const { code } = Babel.transform(src, {
-            plugins: ['transform-typescript'],
-            filename: 'file.js',
-            sourceType: 'module',
+            plugins: ["transform-typescript"],
+            filename: "file.js",
+            sourceType: "module",
           });
           return new Response(code, {
-            headers: { 'Content-Type': 'application/javascript' },
+            headers: { "Content-Type": "application/javascript" },
           });
         },
       };
     </script>
 
-    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"
+    ></script>
 
     <script type="module-shim" src="main.ts"></script>
   </body>

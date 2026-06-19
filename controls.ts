@@ -1,3 +1,4 @@
+import { setOrbitsCount } from './state.ts';
 import type { Controls, InitControlsOptions } from './types.ts';
 
 export function initControls({ state, onChange, onToggleAnimation, onExport }: InitControlsOptions): Controls {
@@ -8,6 +9,7 @@ export function initControls({ state, onChange, onToggleAnimation, onExport }: I
   const orbitStrideRange = document.getElementById('orbitStrideRange') as HTMLInputElement;
   const orbitStrideValue = document.getElementById('orbitStrideValue') as HTMLSpanElement;
   const animateToggle = document.getElementById('animateToggle') as HTMLInputElement;
+  const displayOrbits = document.getElementById('displayOrbits') as HTMLInputElement;
   const exportButton = document.getElementById('exportButton') as HTMLButtonElement;
 
   function refresh(): void {
@@ -24,7 +26,9 @@ export function initControls({ state, onChange, onToggleAnimation, onExport }: I
   });
 
   orbitsCountRange.addEventListener('input', () => {
-    state.orbitsCount = parseInt(orbitsCountRange.value, 10);
+    const value = parseInt(orbitsCountRange.value, 10);
+    setOrbitsCount(state, value);
+    twistRange.max = value.toString();
     refresh();
     onChange();
   });
@@ -41,6 +45,13 @@ export function initControls({ state, onChange, onToggleAnimation, onExport }: I
     exportButton.disabled = isAnimating;
     onToggleAnimation(isAnimating);
   });
+
+  displayOrbits.addEventListener('input', () => {
+    const isDisplayOrbitLines = displayOrbits.checked;
+    state.isDisplayOrbitLines = isDisplayOrbitLines;
+    refresh();
+    onChange();
+  })
 
   exportButton.addEventListener('click', onExport);
 

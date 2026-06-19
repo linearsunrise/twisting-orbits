@@ -1,19 +1,23 @@
-import { pointAngle, polarToCartesian, orbitTwistOffset } from './math.ts';
-import type { DrawingContext, SceneParams } from './types.ts';
+import { pointAngle, polarToCartesian, orbitTwistOffset } from "./math.ts";
+import type { DrawingContext, SceneParams } from "./types.ts";
 
 const POINT_RADIUS_PX = 4;
-const POINT_COLOR = '#a0a0a0';
+const POINT_COLOR = "#a0a0a0";
 const ORBIT_RADIUS_STEP_PX = 10;
 
-/**
- * Орбита с индексом N содержит ровно N точек и имеет радиус N * ORBIT_RADIUS_STEP_PX.
- * Это намеренное правило, а не побочный эффект: оно и создаёт спиралевидный узор.
- *
- * ctx — обычный canvas-контекст или svgcanvas/canvas2svg-совместимый мок с тем же API.
- */
 export function renderOrbitField(
   ctx: DrawingContext,
-  { width, height, centerX, centerY, orbitsCount, orbitStride, twistAmount, clear = true }: SceneParams,
+  {
+    width,
+    height,
+    centerX,
+    centerY,
+    orbitsCount,
+    orbitStride,
+    twistAmount,
+    clear = true,
+    isDisplayOrbitLines,
+  }: SceneParams,
 ): void {
   if (clear) {
     ctx.clearRect(0, 0, width, height);
@@ -26,8 +30,32 @@ export function renderOrbitField(
     const orbitRadius = orbitIndex * ORBIT_RADIUS_STEP_PX;
     const phaseOffset = orbitTwistOffset(orbitIndex, orbitsCount, twistAmount);
 
-    drawOrbitPoints(ctx, centerX, centerY, orbitRadius, pointsOnOrbit, phaseOffset);
+    if (isDisplayOrbitLines) drawOrbitLine(ctx, centerX, centerY, orbitRadius, POINT_COLOR);
+    drawOrbitPoints(
+      ctx,
+      centerX,
+      centerY,
+      orbitRadius,
+      pointsOnOrbit,
+      phaseOffset,
+    );
   }
+}
+
+function drawOrbitLine(
+  ctx: DrawingContext,
+  centerX: number,
+  centerY: number,
+  radius: number,
+  color: string,
+) {
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.3;
+  ctx.stroke();
+  ctx.globalAlpha = 1.0;
 }
 
 function drawOrbitPoints(
@@ -45,7 +73,13 @@ function drawOrbitPoints(
   }
 }
 
-function drawPoint(ctx: DrawingContext, x: number, y: number, radius: number, color: string): void {
+function drawPoint(
+  ctx: DrawingContext,
+  x: number,
+  y: number,
+  radius: number,
+  color: string,
+): void {
   ctx.fillStyle = color;
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
