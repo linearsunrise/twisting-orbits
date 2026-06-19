@@ -22,14 +22,6 @@ export interface SceneParams {
   isDisplayOrbitLines: boolean;
 }
 
-export interface DrawingContext extends CanvasRenderingContext2D {
-  // clearRect(x: number, y: number, w: number, h: number): void;
-  // fillStyle: string | CanvasGradient | CanvasPattern;
-  // beginPath(): void;
-  // arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, counterclockwise?: boolean): void;
-  // fill(fillRule?: CanvasFillRule): void;
-}
-
 export interface Controls {
   refresh(): void;
 }

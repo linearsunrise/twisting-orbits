@@ -1,12 +1,12 @@
 import { pointAngle, polarToCartesian, orbitTwistOffset } from "./math.ts";
-import type { DrawingContext, SceneParams } from "./types.ts";
+import type { SceneParams } from "./types.ts";
 
 const POINT_RADIUS_PX = 4;
 const POINT_COLOR = "#a0a0a0";
 const ORBIT_RADIUS_STEP_PX = 10;
 
 export function renderOrbitField(
-  ctx: DrawingContext,
+  ctx: CanvasRenderingContext2D,
   {
     width,
     height,
@@ -30,7 +30,10 @@ export function renderOrbitField(
     const orbitRadius = orbitIndex * ORBIT_RADIUS_STEP_PX;
     const phaseOffset = orbitTwistOffset(orbitIndex, orbitsCount, twistAmount);
 
-    if (isDisplayOrbitLines) drawOrbitLine(ctx, centerX, centerY, orbitRadius, POINT_COLOR);
+    if (isDisplayOrbitLines) {
+      drawOrbitLine(ctx, centerX, centerY, orbitRadius, POINT_COLOR);
+    }
+
     drawOrbitPoints(
       ctx,
       centerX,
@@ -43,7 +46,7 @@ export function renderOrbitField(
 }
 
 function drawOrbitLine(
-  ctx: DrawingContext,
+  ctx: CanvasRenderingContext2D,
   centerX: number,
   centerY: number,
   radius: number,
@@ -59,7 +62,7 @@ function drawOrbitLine(
 }
 
 function drawOrbitPoints(
-  ctx: DrawingContext,
+  ctx: CanvasRenderingContext2D,
   centerX: number,
   centerY: number,
   radius: number,
@@ -74,7 +77,7 @@ function drawOrbitPoints(
 }
 
 function drawPoint(
-  ctx: DrawingContext,
+  ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
   radius: number,

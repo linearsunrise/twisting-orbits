@@ -1,7 +1,7 @@
 import { renderOrbitField } from './render.ts';
-import type { DrawingContext, SceneParams } from './types.ts';
+import type { CanvasRenderingContext2D, SceneParams } from './types.ts';
 
-declare var C2S: new (width: number, height: number) => DrawingContext & {
+declare var C2S: new (width: number, height: number) => CanvasRenderingContext2D & {
   getSerializedSvg(fix: boolean): string;
 };
 
