@@ -1,66 +1,69 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Twisting orbits</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas id="draw" width="1920" height="1080"></canvas>
+    <canvas id="draw" class="scene-canvas" width="1920" height="1080"></canvas>
 
-    <div id="controls">
-      <div>
-        <label for="pointRange">Сдвиг: </label>
+    <div class="controls">
+      <div class="controls__row">
+        <label class="controls__label" for="twistRange">Закручивание: </label>
         <input
+          class="controls__range"
           type="range"
-          id="pointRange"
+          id="twistRange"
           min="0"
           max="2"
           value="0"
           step="any"
         />
-        <span id="val">30</span>
+        <span class="controls__value" id="twistValue">0</span>
       </div>
-      <div>
-        <label for="pointRange2">Количество орбит: </label>
-        <input type="range" id="pointRange2" min="0" max="200" value="21" />
-        <span id="val2">30</span>
+
+      <div class="controls__row">
+        <label class="controls__label" for="orbitsCountRange">Количество орбит: </label>
+        <input
+          class="controls__range"
+          type="range"
+          id="orbitsCountRange"
+          min="0"
+          max="200"
+          value="21"
+        />
+        <span class="controls__value" id="orbitsCountValue">21</span>
       </div>
-      <div>
-        <label for="pointRange3">Div: </label>
-        <input type="range" id="pointRange3" min="1" max="50" value="1" />
-        <span id="val3">30</span>
+
+      <div class="controls__row">
+        <label class="controls__label" for="orbitStrideRange">Шаг орбит: </label>
+        <input
+          class="controls__range"
+          type="range"
+          id="orbitStrideRange"
+          min="1"
+          max="50"
+          value="1"
+        />
+        <span class="controls__value" id="orbitStrideValue">1</span>
+      </div>
+
+      <div class="controls__row controls__row--actions">
+        <label class="controls__checkbox-label">
+          <input type="checkbox" id="animateToggle" />
+          Автоанимация
+        </label>
+
+        <button class="controls__button" id="exportButton" type="button">
+          Экспорт в SVG
+        </button>
       </div>
     </div>
+
+    <script src="https://unpkg.com/canvas2svg"></script>
+
+    <script type="module" src="main.js"></script>
   </body>
-
-  <style>
-    * {
-      margin: unset;
-      padding: unset;
-    }
-
-    body {
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      height: 100dvh;
-      width: 100dvw;
-
-      background: #101010;
-    }
-
-    #controls {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 8px;
-    }
-  </style>
-
-  <script src="script.js"></script>
 </html>
