@@ -28,7 +28,7 @@ const controls = initControls({
     }
   },
   onExport: () => {
-    if (state.isAnimating) return; // экспорт доступен только вне анимации
+    if (state.isAnimating) return;
     exportSceneAsSvg(getSceneParams(state));
   },
 });

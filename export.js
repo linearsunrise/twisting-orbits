@@ -11,8 +11,6 @@ export function exportSceneAsSvg(sceneParams, filename = "twisting-orbits.svg") 
 
   const svgContext = new C2S(sceneParams.width, sceneParams.height);
 
-  // clear: false — свежий SVG-контекст и так пустой, незачем полагаться
-  // на то, что clearRect одинаково реализован во всех svgcanvas-аналогах.
   renderOrbitField(svgContext, { ...sceneParams, clear: false });
 
   const svgMarkup = svgContext.getSerializedSvg(true);
