@@ -1,18 +1,17 @@
-export const state = {
+import type { AppState, SceneParams } from './types.ts';
+
+export const state: AppState = {
   width: 0,
   height: 0,
-
   orbitsCount: 21,
   orbitStride: 1,
-
   twistAmount: 0,
   twistMin: 0,
   twistMax: 2,
-
   isAnimating: false,
 };
 
-export function getSceneParams(currentState) {
+export function getSceneParams(currentState: AppState): SceneParams {
   return {
     width: currentState.width,
     height: currentState.height,
