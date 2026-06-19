@@ -44,4 +44,15 @@ window.addEventListener('resize', () => {
   render();
 });
 
+const controlsEl = document.querySelector('.controls') as HTMLElement;
+const controlsToggle = document.getElementById('controlsToggle') as HTMLButtonElement;
+
+controlsEl.addEventListener('dblclick', () => {
+  controlsEl.classList.add('controls--hidden');
+});
+
+controlsToggle.addEventListener('click', () => {
+  controlsEl.classList.remove('controls--hidden');
+});
+
 render();

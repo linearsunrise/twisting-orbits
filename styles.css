@@ -117,3 +117,32 @@ body {
 .controls__button:hover:not(:disabled) {
   background: #1d4ed8;
 }
+
+.controls-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #101010;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls-toggle:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.controls--hidden {
+  display: none;
+}
+
+.controls--hidden ~ .controls-toggle {
+  display: flex;
+}
